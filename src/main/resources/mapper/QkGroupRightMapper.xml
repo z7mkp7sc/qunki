@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wjj.wm.mapper.QkGroupRightMapper" >
+  <resultMap id="BaseResultMap" type="com.wjj.wm.pojo.QkGroupRight" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="right_id" property="rightId" jdbcType="VARCHAR" />
+    <result column="right_type" property="rightType" jdbcType="TINYINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.wjj.wm.pojo.QkGroupRight" >
+    insert into qk_group_right (id, group_id, right_id, 
+      right_type)
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{rightId,jdbcType=VARCHAR}, 
+      #{rightType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wjj.wm.pojo.QkGroupRight" >
+    insert into qk_group_right
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="rightId != null" >
+        right_id,
+      </if>
+      <if test="rightType != null" >
+        right_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="rightId != null" >
+        #{rightId,jdbcType=VARCHAR},
+      </if>
+      <if test="rightType != null" >
+        #{rightType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

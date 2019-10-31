@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wjj.wm.mapper.CsdnBlogMapper" >
+  <resultMap id="BaseResultMap" type="com.wjj.wm.pojo.CsdnBlog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="readNum" property="readnum" jdbcType="INTEGER" />
+    <result column="recommendNum" property="recommendnum" jdbcType="INTEGER" />
+    <result column="blogHomeUrl" property="bloghomeurl" jdbcType="VARCHAR" />
+    <result column="commentNum" property="commentnum" jdbcType="INTEGER" />
+    <result column="publishTime" property="publishtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wjj.wm.pojo.CsdnBlog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, url, title, author, readNum, recommendNum, blogHomeUrl, commentNum, publishTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="listAll" resultType="com.wjj.wm.pojo.CsdnBlog" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM csdnblog
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from csdnblog
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from csdnblog
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wjj.wm.pojo.CsdnBlog" >
+    insert into csdnblog (id, url, title, 
+      author, readNum, recommendNum, 
+      blogHomeUrl, commentNum, publishTime, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{readnum,jdbcType=INTEGER}, #{recommendnum,jdbcType=INTEGER}, 
+      #{bloghomeurl,jdbcType=VARCHAR}, #{commentnum,jdbcType=INTEGER}, #{publishtime,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wjj.wm.pojo.CsdnBlog" >
+    insert into csdnblog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="readnum != null" >
+        readNum,
+      </if>
+      <if test="recommendnum != null" >
+        recommendNum,
+      </if>
+      <if test="bloghomeurl != null" >
+        blogHomeUrl,
+      </if>
+      <if test="commentnum != null" >
+        commentNum,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="readnum != null" >
+        #{readnum,jdbcType=INTEGER},
+      </if>
+      <if test="recommendnum != null" >
+        #{recommendnum,jdbcType=INTEGER},
+      </if>
+      <if test="bloghomeurl != null" >
+        #{bloghomeurl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentnum != null" >
+        #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wjj.wm.pojo.CsdnBlog" >
+    update csdnblog
+    <set >
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="readnum != null" >
+        readNum = #{readnum,jdbcType=INTEGER},
+      </if>
+      <if test="recommendnum != null" >
+        recommendNum = #{recommendnum,jdbcType=INTEGER},
+      </if>
+      <if test="bloghomeurl != null" >
+        blogHomeUrl = #{bloghomeurl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentnum != null" >
+        commentNum = #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wjj.wm.pojo.CsdnBlog" >
+    update csdnblog
+    set url = #{url,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      readNum = #{readnum,jdbcType=INTEGER},
+      recommendNum = #{recommendnum,jdbcType=INTEGER},
+      blogHomeUrl = #{bloghomeurl,jdbcType=VARCHAR},
+      commentNum = #{commentnum,jdbcType=INTEGER},
+      publishTime = #{publishtime,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wjj.wm.pojo.CsdnBlog" >
+    update csdnblog
+    set url = #{url,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      readNum = #{readnum,jdbcType=INTEGER},
+      recommendNum = #{recommendnum,jdbcType=INTEGER},
+      blogHomeUrl = #{bloghomeurl,jdbcType=VARCHAR},
+      commentNum = #{commentnum,jdbcType=INTEGER},
+      publishTime = #{publishtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

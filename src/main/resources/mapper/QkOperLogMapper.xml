@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wjj.wm.mapper.QkOperLogMapper" >
+  <resultMap id="BaseResultMap" type="com.wjj.wm.pojo.QkOperLog" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="op_type" property="opType" jdbcType="TINYINT" />
+    <result column="op_content" property="opContent" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.wjj.wm.pojo.QkOperLog" >
+    insert into qk_oper_log (id, op_type, op_content, 
+      operator, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{opType,jdbcType=TINYINT}, #{opContent,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wjj.wm.pojo.QkOperLog" >
+    insert into qk_oper_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="opType != null" >
+        op_type,
+      </if>
+      <if test="opContent != null" >
+        op_content,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null" >
+        #{opType,jdbcType=TINYINT},
+      </if>
+      <if test="opContent != null" >
+        #{opContent,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

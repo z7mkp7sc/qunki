@@ -1,0 +1,31 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /app
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/boot_tb?useUnicode=true&characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  config-location: classpath:config/mybatis-config.xml
+
+#showSql
+logging:
+  level:
+    com:
+      wjj:
+        wm:
+          mapper : debug
+
+#分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
